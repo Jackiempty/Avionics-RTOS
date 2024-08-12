@@ -1,0 +1,95 @@
+menu "ISP32 Configuration"
+
+    orsource "$IDF_PATH/examples/common_components/env_caps/$IDF_TARGET/Kconfig.env_caps"
+
+    config INT_IO
+        int "GPIO output pin for external interrupt"
+        range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+        default 16
+
+    config INDI_LED
+        int "GPIO output pin for indicator led"
+        range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+        default 1
+
+    config FIRE_1
+        int "GPIO output pin for ignitor #1"
+        range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+        default 47
+
+    config FIRE_2
+        int "GPIO output pin for ignitor #1"
+        range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+        default 48
+
+    config I2C_MASTER_SCL
+        int "SCL GPIO Num"
+        range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+        default 8
+
+    config I2C_MASTER_SDA
+        int "SDA GPIO Num"
+        range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+        default 9
+
+    config LORA_MOSI_GPIO
+		  int "LORA MOSI GPIO"
+      range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+      default 35
+
+    config LORA_MISO_GPIO
+		  int "LORA MISO GPIO"
+      range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+      default 37
+
+    config LORA_SCK_GPIO
+		  int "LORA SCK GPIO"
+      range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+      default 36
+
+  	config LORA_NSS_GPIO
+  		int "LORA NSS GPIO"
+      range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+  		default 21
+
+  	config RST_GPIO
+  		int "LORA RST GPIO"
+      range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+  		default 41
+
+  	config BUSY_GPIO
+  		int "LORA BUSY GPIO"
+      range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+      default 40
+
+  	config TXEN_GPIO
+  		int "LORA TXEN GPIO"
+      range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+  		default -1
+
+  	config RXEN_GPIO
+  		int "LORA RXEN GPIO"
+      range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+  		default -1
+
+    config SD_MOSI_GPIO
+		  int "SD MOSI GPIO"
+      range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+      default 11
+
+    config SD_MISO_GPIO
+		  int "SD MISO GPIO"
+      range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+      default 13
+
+    config SD_SCK_GPIO
+		  int "SD SCK GPIO"
+      range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+      default 12
+
+  	config SD_NSS_GPIO
+  		int "SD NSS GPIO"
+      range ENV_GPIO_RANGE_MIN ENV_GPIO_OUT_RANGE_MAX
+  		default 10
+
+endmenu
