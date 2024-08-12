@@ -1,4 +1,4 @@
-makeSoC=esp32s3
+SoC=esp32s3
 SERIAL_PORT=$(shell ls -d /dev/* | grep usbmodem | head -n1)
 
 .PHONY: all build post_build clean flash serial
