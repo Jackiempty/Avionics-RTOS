@@ -2,7 +2,8 @@ SoC=esp32s3
 SERIAL_PORT=$(shell ls -d /dev/* | grep usbmodem | head -n1)
 
 .PHONY: all build post_build clean flash serial
-all: build post_build flash
+
+all: build post_build set_target flash
 
 set_target: sdkconfig
 	idf.py set-target $(SoC)
