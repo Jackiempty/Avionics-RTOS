@@ -61,18 +61,18 @@ void slave_reset() {
   ESP_LOGI(TAG, "Create comparator and generator from the operator");
   ESP_ERROR_CHECK(mcpwm_new_comparator(oper, &comparator_config, &comparator));
 
-  ESP_ERROR_CHECK(mcpwm_new_generator(oper, &generator_config, &generator));
+  // ESP_ERROR_CHECK(mcpwm_new_generator(oper, &generator_config, &generator)); // this one might cause sd_init() failure
 
   // set the initial compare value, so that the servo will spin to the center position
   ESP_ERROR_CHECK(mcpwm_comparator_set_compare_value(comparator, example_angle_to_compare(0)));
 
   ESP_LOGI(TAG, "Set generator action on timer and compare event");
   // go high on counter empty
-  ESP_ERROR_CHECK(mcpwm_generator_set_action_on_timer_event(generator,
-                                                            MCPWM_GEN_TIMER_EVENT_ACTION(MCPWM_TIMER_DIRECTION_UP, MCPWM_TIMER_EVENT_EMPTY, MCPWM_GEN_ACTION_HIGH)));
+  // ESP_ERROR_CHECK(mcpwm_generator_set_action_on_timer_event(generator, // dependent on new_generator()
+  //                                                          MCPWM_GEN_TIMER_EVENT_ACTION(MCPWM_TIMER_DIRECTION_UP, MCPWM_TIMER_EVENT_EMPTY, MCPWM_GEN_ACTION_HIGH)));
   // go low on compare threshold
-  ESP_ERROR_CHECK(mcpwm_generator_set_action_on_compare_event(generator,
-                                                              MCPWM_GEN_COMPARE_EVENT_ACTION(MCPWM_TIMER_DIRECTION_UP, comparator, MCPWM_GEN_ACTION_LOW)));
+  // ESP_ERROR_CHECK(mcpwm_generator_set_action_on_compare_event(generator, // dependent on new_generator()
+  //                                                            MCPWM_GEN_COMPARE_EVENT_ACTION(MCPWM_TIMER_DIRECTION_UP, comparator, MCPWM_GEN_ACTION_LOW)));
 
   ESP_LOGI(TAG, "Enable and start timer");
   ESP_ERROR_CHECK(mcpwm_timer_enable(timer));

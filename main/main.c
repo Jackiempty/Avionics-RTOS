@@ -40,7 +40,7 @@ void app_main() {
   spi_init(SD_SPI_HOST, CONFIG_SD_MOSI_GPIO, CONFIG_SD_MISO_GPIO,
            CONFIG_SD_SCK_GPIO);
   lora_init();
-  // slave_reset(); // This makes sd_init malfunction
+  slave_reset(); // This makes sd_init malfunction
 
   if (sd_init() == ESP_OK) {
     printf("I am an on-board avionics board!\n");
