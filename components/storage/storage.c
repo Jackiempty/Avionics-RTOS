@@ -15,7 +15,7 @@ void storage_init(char *_fn) {
       sprintf(fn, SD_MOUNT "/" STOR_PREFIX "%04d.txt", ++i);
     f = fopen(fn, "a+");
   } else {
-    f = fopen(fn, "a+");
+    f = fopen(_fn, "a+");
   }
   if (f == NULL)
     esp_restart();

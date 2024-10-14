@@ -43,19 +43,12 @@ void app_main() {
 
   if (sd_init() == ESP_OK) {
     printf("I am an on-board avionics board!\n");
-    printf("stop_0\n");
     storage_init(NULL);
-    printf("stop_1\n");
     esp_log_set_vprintf(log_vprintf);
-    printf("stop_2\n");
     vTaskDelay(pdMS_TO_TICKS(1000));
-    printf("stop_3\n");
     xTaskCreatePinnedToCore(fsm_task, "fsm_task", 4096, NULL, 5, NULL, 1);
-    printf("stop_4\n");
-    xTaskCreatePinnedToCore(sensors_task, "sensors_task", 8192, NULL, 4, NULL, 1);
-    printf("stop_5\n");
+    // xTaskCreatePinnedToCore(sensors_task, "sensors_task", 8192, NULL, 4, NULL, 1);
     // xTaskCreatePinnedToCore(logger_task, "logger_task", 4096, NULL, 3, NULL, 0);
-    printf("stop_6\n");
     // xTaskCreatePinnedToCore(wdt_task, "wdt_task", 2048, NULL, 1, NULL, 1);
   } else {
     printf("I am a ground receiver board!\n");

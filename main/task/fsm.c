@@ -28,7 +28,7 @@ void fsm_task(void* args) {
       flight_time = 0;
     }
     if (last_state != state) {
-      printf("%d\n", state);
+      printf("state: %d\n", state);
       last_state = state;
     }
     switch (state) {
