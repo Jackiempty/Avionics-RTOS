@@ -10,18 +10,10 @@
 static uint8_t uuid;
 static uint8_t* commu_buffer;
 static TimerHandle_t timer_handler;
-static TimerHandle_t imu_timer_handler;
+// static TimerHandle_t imu_timer_handler;
 static imu_t* imu_instance;
 static fsm_state_e* state;
 static pressure_sensor_t* pressure_altitude_instance;
-static calibration_t cal = {
-    .gyro_bias_offset = {.x = 0, .y = 0, .z = 0},
-    .accel_offset = {.x = 0, .y = 0, .z = 0},
-    .accel_scale_lo = {.x = 1, .y = 1, .z = 1},
-    .accel_scale_hi = {.x = -1, .y = -1, .z = -1},
-    .mag_offset = {.x = 0, .y = 0, .z = 0},
-    .mag_scale = {.x = 1, .y = 1, .z = 1},
-};
 static gps_t* gps_instance;
 
 static void sensors_loop(TimerHandle_t xTimervoid) {
@@ -54,8 +46,8 @@ static void sensors_loop(TimerHandle_t xTimervoid) {
   memcpy(logger_ptr, &imu_instance->g, sizeof(imu_instance->g));
   logger_ptr += sizeof(imu_instance->g);
 
-  memcpy(logger_ptr, &imu_instance->m, sizeof(imu_instance->m));
-  logger_ptr += sizeof(imu_instance->m);
+  // memcpy(logger_ptr, &imu_instance->m, sizeof(imu_instance->m));
+  // logger_ptr += sizeof(imu_instance->m);
 
   memcpy(logger_ptr, &gps_instance->longitude, sizeof(gps_instance->longitude));
   logger_ptr += sizeof(gps_instance->longitude);
@@ -82,13 +74,13 @@ static void sensors_loop(TimerHandle_t xTimervoid) {
   memcpy(logger_ptr, &ecc, sizeof(ecc));
   logger_ptr += sizeof(ecc);
 
-  ESP_LOGI(TAG, "%u,%u,%lu,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%ld,%ld,%f,%f,%f,%f\n",
-           uuid, *state, systick, pressure_altitude_instance->relative_altitude,
-           pressure_altitude_instance->velocity,
-           imu_instance->a.x, imu_instance->a.y, imu_instance->a.z,
-           imu_instance->g.x, imu_instance->g.y, imu_instance->g.z,
-           imu_instance->m.x, imu_instance->m.y, imu_instance->m.z,
-           gps_instance->longitude, gps_instance->latitude, gps_instance->altitude, imu_instance->roll, imu_instance->pitch, imu_instance->heading);
+  ESP_LOGI(TAG, "%u, %lu, %f, %f, %ld, %ld, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f\n", 
+            *state, systick, pressure_altitude_instance->relative_altitude,
+            pressure_altitude_instance->velocity, 
+            gps_instance->longitude, gps_instance->latitude, gps_instance->altitude,
+            imu_instance->a.x, imu_instance->a.y, imu_instance->a.z, 
+            imu_instance->g.x, imu_instance->g.y, imu_instance->g.z,
+            imu_instance->roll, imu_instance->pitch, imu_instance->heading);
 }
 
 void sensors_task(void* args) {
@@ -102,7 +94,7 @@ void sensors_task(void* args) {
   bmp280_init();
   gps_init();
   // storage_read_config("/sd/imu", &cal, sizeof(cal));
-  // imu_init(&cal, 100);
+  imu_init();
 
   // calibration_t _cal;
   // memset(&_cal, 0, sizeof(_cal));
